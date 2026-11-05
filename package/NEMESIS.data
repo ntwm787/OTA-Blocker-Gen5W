@@ -1,0 +1,14 @@
+[nemesis]
+version=1.1
+id=gen5w.ota-blocker
+name=OTA Blocker
+package-version=1.0.0
+type=application
+short-desc="Firmware-specific OTA-app blocker for IONIQ 5 Gen5W 260507."
+detailed-desc="Requires build eng.vmadmin.20260507.094910 (260507) and exact matching OTA APK/ODEX files; other firmware is refused. No HMG-API needed. Uninstall restores stock. Independent modem blocking and USB-update compatibility are unverified."
+os=NEEV*.260507
+models=neev*
+depends="!hmgapi"
+preinstall=scripts/pre.sh
+postinstall=scripts/post.sh
+preuninstall=scripts/preun.sh
