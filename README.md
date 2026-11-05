@@ -6,7 +6,7 @@ Standalone NEMESIS 1.1 package for users without HMG-API. No HMG-API runtime or 
 
 ## Downloads
 
-Get the USB installer, direct NEMESIS package, source and checksums from [Releases](https://github.com/ntwm787/OTA-Blocker-Gen5W/releases). Version 1.0.0 is a prerelease pending install/uninstall validation on the new NEMESIS.
+Get the USB installer, direct NEMESIS package, source and checksums from [Releases](https://github.com/ntwm787/OTA-Blocker-Gen5W/releases).
 
 ## Supported target
 IONIQ 5 Gen5W, Android API 19, incremental build `eng.vmadmin.20260507.094910`, Red Bend OTA configuration, and the exact inspected HKMC_DMClient_OTA APK/ODEX hashes. The script accepts recognized IONIQ 5 device identifiers across model years but rejects different binaries. ccNC and other firmware are unsupported. Compatibility metadata is advisory; script hash checks are mandatory.
@@ -33,8 +33,6 @@ The legacy backup location `/data/nemesis/backup/keybord.ota-app-offline/origina
 ## License and source
 Original scripts: Copyright (C) 2026 ntwm787 and contributors. Free to use, modify and share under the custom [Free Use and No Sale License](LICENSE). Selling copies, paid access and paid distribution of modified versions are prohibited. This is source available, with a no-sale restriction. Adapted from the KeyBORD OTA offline v4 scripts. Only small patch chunks are included, not a complete OEM APK/ODEX. OEM software retains its ownership. NEMESIS is separate AGPL-3.0 software: https://github.com/xwtk/hmg_nemesis
 
-## Release validation
-Before public stable release, validate install, a normal restart, observed offline behavior, and uninstall/restoration on the new NEMESIS version. This package remains a release candidate until that integration test is recorded.
 
 ## Build and local checks
 
