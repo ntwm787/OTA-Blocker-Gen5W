@@ -4,6 +4,16 @@
 
 Standalone NEMESIS 1.1 package for users without HMG-API. No HMG-API runtime or code is bundled. The descriptor excludes its NEMESIS package ID `hmgapi`.
 
+## Firmware identifiers
+
+| Identifier | Value | Source |
+| --- | --- | --- |
+| Hyundai software version | `NEEV23.USA.S5W_M.V015.012.260507` | Reported by the owner; recorded as user-provided in the diagnostic report. |
+| Head-unit identifier | `NE1AE.S5BMC.US` | Reported by the owner; recorded as user-provided in the diagnostic report. |
+| Internal Android build | `eng.vmadmin.20260507.094910` | Read directly from the head unit's `ro.build.version.incremental` property. |
+
+The Hyundai software version is the user-facing identifier. The installer checks the internal Android build and the exact OTA APK/ODEX file hashes. The reported Hyundai version and head-unit identifier are documented for reference, not additional checks performed by the script. A matching `260507` date alone does not establish compatibility.
+
 ## Supported target
 IONIQ 5 Gen5W, Android API 19, incremental build `eng.vmadmin.20260507.094910`, Red Bend OTA configuration, and the exact inspected HKMC_DMClient_OTA APK/ODEX hashes. The script accepts recognized IONIQ 5 device identifiers across model years but rejects different binaries. ccNC and other firmware are unsupported. Compatibility metadata is advisory; script hash checks are mandatory.
 
