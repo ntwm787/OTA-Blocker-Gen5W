@@ -8,6 +8,18 @@ Standalone NEMESIS 1.1 package for users without HMG-API. No HMG-API runtime or 
 
 Get the USB installer, direct NEMESIS package, source and checksums from [Releases](https://github.com/ntwm787/OTA-Blocker-Gen5W/releases).
 
+## Help expand vehicle and firmware support
+
+Use the [OTA Compatibility Collector](collector/README.md) to submit evidence for another car or build. It is a read-only diagnostic script, not a blocker installer. It leaves any existing blocker untouched and requires no restart.
+
+- [Download the USB collector](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Compatibility%20Collector%20USB%201.0.0.zip)
+- [Collector source ZIP](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Compatibility%20Collector%20Source%201.0.0.zip)
+- [Checksums](collector/SHA256SUMS.txt)
+
+Run it through NEMESIS while parked and with Android fully started, copy the generated result folder to your computer, ZIP the whole folder, and **send it privately to maintainer ntwm787** using an agreed private channel. Include make/model/year, sales region, software version, NEMESIS version and existing OTA modifications. If you need a private submission channel, open an issue asking how to submit; **do not attach captures or OEM code to public issues**. Nothing is uploaded automatically.
+
+Local collector simulations passed; head-unit validation is pending. Submitting a capture does not establish compatibility or guarantee support. The blocker remains restricted to its supported firmware/files until a matching patch is inspected and validated. See the collector guide for full instructions and result-status meanings.
+
 ## Firmware identifiers
 
 | Identifier | Value | Source |

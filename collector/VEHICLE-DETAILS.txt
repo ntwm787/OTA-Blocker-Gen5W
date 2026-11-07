@@ -1,0 +1,14 @@
+Optional: fill this in before running. Do not include VIN, registration,
+serial numbers, account details, precise location, or other personal data.
+
+Make:
+Model:
+Model year:
+Sales region (for example USA, Canada, Europe):
+Infotainment family if known (Gen5W, ccNC, other, unknown):
+Software version shown in Settings:
+NEMESIS version:
+HMG-API installed? yes / no / unknown:
+Existing OTA blocker or OTA-app modifications? Describe briefly:
+
+The script copies this text into the result folder without executing it.
