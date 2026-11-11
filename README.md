@@ -6,6 +6,8 @@ Standalone NEMESIS 1.1 package for users without HMG-API. No HMG-API runtime or 
 
 ## Downloads
 
+**Combined 1.2.0 release candidate** supports firmware 260507 and 20260903. See the [downloads and upgrade instructions](release-candidates/v1.2.0/README.md). Same-firmware upgrade simulations passed. Vehicle testing of the combined package is pending.
+
 Get the USB installer, direct NEMESIS package, source and checksums from [Releases](https://github.com/ntwm787/OTA-Blocker-Gen5W/releases).
 
 ## Help expand vehicle and firmware support

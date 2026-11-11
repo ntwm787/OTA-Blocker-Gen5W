@@ -1,0 +1,3 @@
+41038f8bd874c6e7f15e7ff477ab557dbbc997fec0271bcf6321cf1e40da22be  gen5w.ota-blocker.zip
+e7f605efaea7c2074b433080422ff7ed99402e103ef94094daa8eee3d5c03e19  OTA Blocker Source Combined 1.2.0 RC.zip
+2297d3329c914c000cdeca985f7a776a13a848daba4e7cf48f49d07f7feb0aa5  OTA Blocker USB Combined 1.2.0 RC.zip
