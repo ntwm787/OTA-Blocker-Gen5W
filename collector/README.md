@@ -55,3 +55,7 @@ Symlinked files/directories and unusual paths are skipped. APK scan depth is bou
 Editable source, build tool and mock tests are included in the separate source ZIP. Build with `python build.py`. On Windows, `python tests/test_collector.py` uses Git Bash and fake vehicle files under `work/collector-tests`; it never connects to a car. Local simulation is not vehicle validation.
 
 Copyright (C) 2026 ntwm787 and contributors. Original collector source uses this repository's custom Free Use and No Sale License; see LICENSE. Free to use, modify and share; sale and paid access are prohibited. No OEM APK/ODEX or NEMESIS executable is bundled. OEM software remains owned by its respective owners. NEMESIS is separately obtained AGPL-3.0 software: https://github.com/xwtk/hmg_nemesis
+
+## 20260903 runtime check
+
+[Download the 20260903 Runtime Check USB](downloads/OTA%20Runtime%20Check%2020260903%20USB.zip?raw=true). Run after a normal head-unit restart and share the result folder privately. NEMESIS success means the report was saved. Check the report for any optional diagnostics that did not return data and review the captured OTA events.
