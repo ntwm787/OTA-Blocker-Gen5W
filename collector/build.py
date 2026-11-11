@@ -6,8 +6,8 @@ import hashlib
 ROOT = Path(__file__).resolve().parent
 USB_FILES = ['NEMESIS.data', 'NEMESIS.sh', 'OTA-COMPATIBILITY.marker',
              'VEHICLE-DETAILS.txt', 'README.md', 'LICENSE']
-ARTIFACTS = [('OTA Compatibility Collector USB 1.0.2.zip', USB_FILES),
-             ('OTA Compatibility Collector Source 1.0.2.zip',
+ARTIFACTS = [('OTA Compatibility Collector USB 1.0.3.zip', USB_FILES),
+             ('OTA Compatibility Collector Source 1.0.3.zip',
               USB_FILES + ['build.py', 'tests/test_collector.py', 'VALIDATION.md'])]
 for name, files in ARTIFACTS:
     with ZipFile(ROOT / name, 'w', ZIP_DEFLATED) as archive:

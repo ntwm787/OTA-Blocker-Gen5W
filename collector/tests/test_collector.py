@@ -93,11 +93,12 @@ pm() {
     if mode == 'nohash':
         mock += '\ncommand() { case "$*" in "-v sha256sum"|"-v sha1sum"|"-v md5sum"|"-v md5") return 1 ;; esac; builtin command "$@"; }\n'
     if mode == 'kitkat':
+        mock += '\nprintf() { return 127; }\n'
         mock += r"""
 command() { case "$*" in "-v wc") return 1 ;; esac; builtin command "$@"; }
 ls() {
  bytes=$(wc -c < "$2") || return 1
- printf '%s %s %s %s %s %s %s\n' '-rw-r--r--' 0 0 "$bytes" 2026-11-11 12:00 "${2##*/}"
+ builtin printf '%s %s %s %s %s %s %s\n' '-rw-r--r--' 0 0 "$bytes" 2026-11-11 12:00 "${2##*/}"
 }
 """
     if mode == 'limits':

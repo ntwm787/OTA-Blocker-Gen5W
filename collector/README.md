@@ -1,4 +1,4 @@
-# OTA Compatibility Collector 1.0.2
+# OTA Compatibility Collector 1.0.3
 
 A read-only diagnostic script for collecting the evidence needed to investigate OTA-blocker support on additional vehicles and firmware builds. It runs once through NEMESIS; it is not an installer or blocker.
 
@@ -7,7 +7,7 @@ The collector has no model or firmware lock. Collection on another vehicle does 
 ## Run from USB
 
 1. Park the vehicle. Wait until Android and NEMESIS are fully started. Do not run during a firmware update, preparation, installation, or pending update restart; this collector does not determine whether an update is active.
-2. Back up the USB's existing `NEMESIS.data` and `NEMESIS.sh` on your computer. Extract **OTA Compatibility Collector USB 1.0.2.zip** to the USB root. Keep `NEMESIS.data`, `NEMESIS.sh`, and `OTA-COMPATIBILITY.marker` together. There is no inner package ZIP. Do not add `NEMESIS.emergency`.
+2. Back up the USB's existing `NEMESIS.data` and `NEMESIS.sh` on your computer. Extract **OTA Compatibility Collector USB 1.0.3.zip** to the USB root. Keep `NEMESIS.data`, `NEMESIS.sh`, and `OTA-COMPATIBILITY.marker` together. There is no inner package ZIP. Do not add `NEMESIS.emergency`.
 3. Optionally fill in `VEHICLE-DETAILS.txt`, especially make/model/year, sales region, displayed software version, NEMESIS version, and existing OTA modifications. Do not enter personal identifiers.
 4. Insert the USB and confirm script execution in NEMESIS. Root execution is required. No restart is needed.
 5. After the script finishes, copy the entire new `OTA-Compatibility-YYYYMMDD-HHMMSS-PID` folder to your computer before inspecting it. ZIP that local folder and return it privately for inspection. Retain incomplete results as well.
