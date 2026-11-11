@@ -33,3 +33,7 @@ Run `python build.py` to rebuild the ZIPs. See VALIDATION.md in the source archi
 ## Runtime check after installation
 
 [Download the combined Runtime Check USB](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Runtime%20Check%20Combined%20USB%201.1.0.zip) for firmware 260507 or 20260903. Run after a normal head-unit restart and return the generated `KeyBORD-OTA-Runtime-…` folder privately. The report records the OTA file checksums and captures existing matching log events. A NEMESIS success message means the report was saved.
+
+## Vehicle verification on 20260903
+
+On build `eng.vmadmin.20260903.161833`, the 1.1.0 RC installation was reported successful. The follow-up runtime report showed Android boot complete and the OTA service starting. The live ODEX matched the expected patched checksum and the retained backup matched the stock checksum. The captured log contained no Red Bend connection attempt or `offline=true` event. Runtime blocking, uninstall, and the on-vehicle upgrade to the combined package remain unverified.
