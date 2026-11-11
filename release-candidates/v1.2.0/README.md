@@ -29,3 +29,7 @@ On the same firmware, insert the combined USB and approve **Update** when NEMESI
 ## Validation and source
 
 Run `python build.py` to rebuild the ZIPs. See VALIDATION.md in the source archive for fixture tests and vehicle status. The custom Free Use and No Sale License covers the original scripts. The package includes small patch chunks and requires matching OEM files already on the vehicle.
+
+## Runtime check after installation
+
+[Download the combined Runtime Check USB](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Runtime%20Check%20Combined%20USB%201.1.0.zip) for firmware 260507 or 20260903. Run after a normal head-unit restart and return the generated `KeyBORD-OTA-Runtime-…` folder privately. The report records the OTA file checksums and captures existing matching log events. A NEMESIS success message means the report was saved.

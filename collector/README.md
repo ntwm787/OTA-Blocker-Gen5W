@@ -56,6 +56,6 @@ Editable source, build tool and mock tests are included in the separate source Z
 
 Copyright (C) 2026 ntwm787 and contributors. Original collector source uses this repository's custom Free Use and No Sale License; see LICENSE. Free to use, modify and share; sale and paid access are prohibited. No OEM APK/ODEX or NEMESIS executable is bundled. OEM software remains owned by its respective owners. NEMESIS is separately obtained AGPL-3.0 software: https://github.com/xwtk/hmg_nemesis
 
-## 20260903 runtime check
+## Runtime check after installation
 
-[Download the 20260903 Runtime Check USB](downloads/OTA%20Runtime%20Check%2020260903%20USB.zip?raw=true). Run after a normal head-unit restart and share the result folder privately. NEMESIS success means the report was saved. Check the report for any optional diagnostics that did not return data and review the captured OTA events.
+[Download the combined Runtime Check USB](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Runtime%20Check%20Combined%20USB%201.1.0.zip) for firmware 260507 or 20260903. Run after a normal head-unit restart and return the generated `KeyBORD-OTA-Runtime-…` folder privately. The report records the OTA file checksums and captures existing matching log events. A NEMESIS success message means the report was saved.
