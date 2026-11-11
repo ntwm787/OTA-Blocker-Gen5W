@@ -12,8 +12,8 @@ Get the USB installer, direct NEMESIS package, source and checksums from [Releas
 
 Use the [OTA Compatibility Collector](collector/README.md) to submit evidence for another car or build. It is a read-only diagnostic script, not a blocker installer. It leaves any existing blocker untouched and requires no restart.
 
-- [Download the USB collector](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Compatibility%20Collector%20USB%201.0.0.zip)
-- [Collector source ZIP](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Compatibility%20Collector%20Source%201.0.0.zip)
+- [Download the USB collector](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Compatibility%20Collector%20USB%201.0.2.zip)
+- [Collector source ZIP](https://raw.githubusercontent.com/ntwm787/OTA-Blocker-Gen5W/main/collector/downloads/OTA%20Compatibility%20Collector%20Source%201.0.2.zip)
 - [Checksums](collector/SHA256SUMS.txt)
 
 Run it through NEMESIS while parked and with Android fully started, copy the generated result folder to your computer, ZIP the whole folder, and **send it privately to maintainer ntwm787** using an agreed private channel. Include make/model/year, sales region, software version, NEMESIS version and existing OTA modifications. If you need a private submission channel, open an issue asking how to submit; **do not attach captures or OEM code to public issues**. Nothing is uploaded automatically.

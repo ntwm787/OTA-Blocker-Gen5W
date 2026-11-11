@@ -1,2 +1,2 @@
-723e413247b7c0b28f55cdcdaf80e290e411bf3d358e6452cd3b695306e6914a  OTA Compatibility Collector USB 1.0.0.zip
-0878a79aa522166d0d8fb75661ebe1393b6f6ac150bb262bcf28386cd51abe1c  OTA Compatibility Collector Source 1.0.0.zip
+8c12cdcd89224f70688a04bd074fc7bf7c8afa1c1e125e1b29c52ff4377fe2e8  OTA Compatibility Collector USB 1.0.2.zip
+7bd64a48769899931e3dbd64019b817b0a1047c01a29b36ac3c8e599333d00c9  OTA Compatibility Collector Source 1.0.2.zip

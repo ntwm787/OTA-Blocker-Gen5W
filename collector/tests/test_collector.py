@@ -92,6 +92,14 @@ pm() {
         mock += '\ncp() { command cp "$@" || return; case "$1" in */HKMC_DMClient_OTA.apk) printf changed >> "$1" ;; esac; }\n'
     if mode == 'nohash':
         mock += '\ncommand() { case "$*" in "-v sha256sum"|"-v sha1sum"|"-v md5sum"|"-v md5") return 1 ;; esac; builtin command "$@"; }\n'
+    if mode == 'kitkat':
+        mock += r"""
+command() { case "$*" in "-v wc") return 1 ;; esac; builtin command "$@"; }
+ls() {
+ bytes=$(wc -c < "$2") || return 1
+ printf '%s %s %s %s %s %s %s\n' '-rw-r--r--' 0 0 "$bytes" 2026-11-11 12:00 "${2##*/}"
+}
+"""
     if mode == 'limits':
         script = script.replace('MAX_FILE_BYTES=67108864', 'MAX_FILE_BYTES=5')
     script = script.replace('umask 077', 'umask 077\n' + mock)
@@ -102,19 +110,22 @@ pm() {
     outputs = list(usb.glob('OTA-Compatibility-*'))
     if mode in ['nonroot', 'booting']:
         assert result.returncode != 0
-        assert not outputs
+        assert len(outputs) == 1
+        assert (outputs[0] / 'STATUS.txt').read_text().strip() == 'FAILED'
+        log = (outputs[0] / 'collector.log').read_text()
+        assert ('Root execution required' if mode == 'nonroot' else 'Android has fully started') in log
     else:
         assert result.returncode == 0, (result.stdout, result.stderr)
         assert len(outputs) == 1
         out = outputs[0]
         status = (out / 'STATUS.txt').read_text().strip()
-        assert status == ('COMPLETE' if mode == 'normal' and present else 'PARTIAL'), status
+        assert status == ('COMPLETE' if mode in ('normal', 'kitkat') and present else 'PARTIAL'), status
         manifest = (out / 'files.tsv').read_text()
         assert 'secret.apk' not in manifest
         assert 'Unrelated.apk' not in manifest
         assert 'uninstall.sh' not in manifest
         assert (out / 'VEHICLE-DETAILS.txt').read_text() == details
-        if mode == 'normal' and present:
+        if mode in ('normal', 'kitkat') and present:
             rows = manifest.splitlines()[1:]
             assert len(rows) == 7, rows
             for row in rows:
@@ -136,7 +147,7 @@ pm() {
 
 
 subprocess.run([str(BASH), '-n', str(ROOT / 'NEMESIS.sh')], check=True)
-for scenario in ['normal', 'nonroot', 'booting', 'copyfailure', 'changed', 'nohash', 'limits', 'traversal']:
+for scenario in ['normal', 'nonroot', 'booting', 'copyfailure', 'changed', 'nohash', 'limits', 'traversal', 'kitkat']:
     run_case(scenario)
 run_case(present=False)
 print('All collector simulations passed; no vehicle or host system files were used.')

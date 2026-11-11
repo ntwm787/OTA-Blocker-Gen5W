@@ -8,20 +8,43 @@ umask 077
 case "$0" in /*) USB=${0%/*} ;; *) USB=$(pwd) ;; esac
 case "$USB" in /storage/usb[0-9]*|/mnt/media_rw/usb[0-9]*) ;; *) echo 'Run this collector from the NEMESIS USB root.'; exit 1 ;; esac
 [ -f "$USB/OTA-COMPATIBILITY.marker" ] || { echo 'Collector marker missing.'; exit 1; }
-IDENTITY=$(id 2>&1) || exit 1
-case "$IDENTITY" in uid=0\(*|'uid=0 '*) ;; *) echo 'Root execution required; collection not started.'; exit 1 ;; esac
-[ "$(getprop sys.boot_completed)" = 1 ] || { echo 'Wait until Android has fully started.'; exit 1; }
-for CMD in mkdir cp wc cat date; do
+for CMD in mkdir date; do
  command -v "$CMD" >/dev/null 2>&1 || { echo "Missing required tool: $CMD"; exit 1; }
 done
 OUT="$USB/OTA-Compatibility-$(date +%Y%m%d-%H%M%S)-$$"
 mkdir "$OUT" || exit 1
 exec > "$OUT/collector.log" 2>&1
-echo 'OTA Compatibility Collector 1.0.0'
+echo 'OTA Compatibility Collector 1.0.2'
+echo "USB root: $USB"
+printf 'RUNNING\n' > "$OUT/STATUS.txt" || exit 1
+trap 'rc=$?; if [ "$rc" -ne 0 ]; then echo "Collection failed (exit $rc)."; printf "FAILED\n" > "$OUT/STATUS.txt"; fi' EXIT
+IDENTITY=$(id 2>&1) || { echo "Could not read execution identity: $IDENTITY"; exit 1; }
+case "$IDENTITY" in uid=0\(*|'uid=0 '*) ;; *) echo 'Root execution required; collection not started.'; exit 1 ;; esac
+[ "$(getprop sys.boot_completed)" = 1 ] || { echo 'Wait until Android has fully started.'; exit 1; }
 echo "Identity: $IDENTITY"
 echo 'Only the new USB result directory is written. No update is requested.'
-printf 'RUNNING\n' > "$OUT/STATUS.txt" || exit 1
 trap 'echo "Collection interrupted; retain partial results."; exit 1' HUP INT TERM
+for CMD in cp ls; do
+ command -v "$CMD" >/dev/null 2>&1 || { echo "Missing required tool: $CMD"; exit 1; }
+done
+file_size() (
+ set -f
+ if command -v wc >/dev/null 2>&1 && SIZE_LINE=$(wc -c < "$1"); then
+  set -- $SIZE_LINE
+  BYTES=$1
+ else
+  SIZE_LINE=$(ls -ln "$1") || return 1
+  set -- $SIZE_LINE
+  # KitKat toolbox has no hard-link-count column. GNU/Toybox include it.
+  case "$1" in -*) ;; *) return 1 ;; esac
+  case "$5" in
+   ????-??-??) BYTES=$4 ;;
+   *) BYTES=$5 ;;
+  esac
+ fi
+ case "$BYTES" in ''|*[!0123456789]*) return 1 ;; esac
+ printf '%s\n' "$BYTES"
+)
 PARTIAL=0
 COUNT=0
 TOTAL=0
@@ -38,11 +61,9 @@ printf '%s\n' "$HASH_ALGORITHM" > "$OUT/HASH-ALGORITHM.txt" || exit 1
 printf 'result\tbytes\tsource\tdestination\tdigest\n' > "$OUT/files.tsv" || exit 1
 : > "$OUT/seen.txt" || exit 1
 if [ -f "$USB/VEHICLE-DETAILS.txt" ] && [ ! -L "$USB/VEHICLE-DETAILS.txt" ]; then
- DETAILS_SIZE=$(wc -c < "$USB/VEHICLE-DETAILS.txt") || exit 1
- set -- $DETAILS_SIZE
- if [ "$1" -le 4096 ]; then
+ if DETAILS_SIZE=$(file_size "$USB/VEHICLE-DETAILS.txt") && [ "$DETAILS_SIZE" -le 4096 ]; then
   cp "$USB/VEHICLE-DETAILS.txt" "$OUT/VEHICLE-DETAILS.txt" || exit 1
- else echo 'Vehicle details exceed 4 KiB; not copied.'; PARTIAL=1; fi
+ else echo 'Vehicle details size unavailable or exceeds 4 KiB.'; PARTIAL=1; fi
 fi
 digest() {
  [ -n "$HASH_TOOL" ] || return 1
@@ -77,10 +98,7 @@ copy_file() {
  done
  while IFS= read -r PREVIOUS; do [ "$PREVIOUS" != "$SRC" ] || return; done < "$OUT/seen.txt"
  printf '%s\n' "$SRC" >> "$OUT/seen.txt" || exit 1
- SIZE_OUTPUT=$(wc -c < "$SRC") || { note "Cannot size: $SRC"; PARTIAL=1; return; }
- set -- $SIZE_OUTPUT
- SIZE=$1
- case "$SIZE" in ''|*[!0123456789]*) note "Invalid file size: $SRC"; PARTIAL=1; return ;; esac
+ SIZE=$(file_size "$SRC") || { note "Cannot size: $SRC"; PARTIAL=1; return; }
  if [ "$SIZE" -gt "$MAX_FILE_BYTES" ] || [ "$COUNT" -ge "$MAX_FILES" ] || [ "$((TOTAL + SIZE))" -gt "$MAX_TOTAL_BYTES" ]; then
   note "Collection size limit: $SRC ($SIZE bytes)"; PARTIAL=1; return
  fi
